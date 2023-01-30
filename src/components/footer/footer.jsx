@@ -2,7 +2,7 @@
 function Footer(){
     return (
         <div>
-            <footer> Footer pro</footer>
+            <footer className="w3-blue"> Footer</footer>
         </div>
     );
 }

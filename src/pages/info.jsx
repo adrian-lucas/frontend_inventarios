@@ -19,9 +19,7 @@ function Info(){
     return (
         <div style={{color:'red'}}>
             <p>
-            {
-                activo?'Esta activo':'No esta activo'
-            }
+            { activo?'Esta activo':'No esta activo'}
             </p>
             <button onClick = {cambiarActivo}>Cambiar estado</button>
         </div>
