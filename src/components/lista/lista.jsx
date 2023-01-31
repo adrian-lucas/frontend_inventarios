@@ -1,27 +1,30 @@
 import data from '../../mockdata_usuarios.json';
+import Tarjeta from '../tarjeta/tarjeta';
 import { useRef,useState} from 'react';
+
+let cantUsuarios = 10;
 function Lista(){
     const divRef = useRef(); 
    
-    let cantUsuarios = 10;
+    
     //const usuarios = data.slice(0,10);
-    const [usuarios,setUsuarios] = useState(["adrian","lucas"]);
+    const [usuarios,setUsuarios] = useState(data.slice(0,cantUsuarios));
     const [color,setColor] = useState(["rojo"]);
 
     const agregarUsuario = ()=>{
-          setUsuarios(["sdf"]);
-        }
+        console.log(cantUsuarios);
+        setUsuarios(data.slice(0,++cantUsuarios));
+    }
+   
+      
     const cambiarColor = ()=>{
-            setColor("verde");
+        setColor("verde");
     }
     
-
-
-
     return(
         <div ref={divRef}>
             <div >{color}</div>
-            <ul className='w3-ul'>{usuarios.map((usuario)=>{return <li >{usuario}</li>})}</ul>
+            <ul className='w3-ul'>{usuarios.map((usuario)=>{return <li key={usuario.id} onClick={mostrar}>{usuario.first_name}</li>})}</ul>
             <button onClick={agregarUsuario}>Siguiente</button>
         </div>
     );
