@@ -1,6 +1,6 @@
 import { useState,useEffect,useRef } from "react";
 
-function Formulario(){
+function Formulario({usuarios,setUsuarios}){
  const [firstName, setFirstName] = useState('');
  const [secondName,setSecondName] = useState('');
  const [email, setEmail] = useState('');
@@ -8,30 +8,47 @@ function Formulario(){
  const [gender,setGender] = useState('');
  const [errores,setErrores] = useState({firstName:false,secondName:false});
  const disabled = useRef(null); 
-
- const verDatos = (e)=>{
+ 
+ const input= useRef();
+ const agregar = (e)=>{
     e.preventDefault();
     let resError = 'ERROR valores inválidos';
-    let resExito = `Nombre: ${firstName} ${secondName} \n Email: ${email} \n Username: ${userName} \n Gender: ${gender}`;
+    // let resExito = `Nombre: ${firstName} ${secondName} \n Email: ${email} \n Username: ${userName} \n Gender: ${gender}`;
     let valido = true;
     if(firstName === ''){
         resError+=`\n First Name :${firstName}`;
         valido = false;
     }
     if(secondName === ''){
-        resError+= `\n Second Name : ${secondName};`;
+        resError+= `\n Last Name : ${secondName}`;
         valido = false;
     }
     if(userName === ''){
-        resError+= `\n User Name: ${userName};`;
+        resError+= `\n User Name: ${userName}`;
         valido = false;
     }
     if(gender === ''){
         resError+= `\n Gender: ${gender}`;
         valido = false;
     }
-
-    alert(valido?resExito:resError);
+    if(email === ''){
+        resError+= `\n Email: ${email}`;
+        valido = false;
+    }
+    
+    if(valido){
+        const nuevoUsuarios = {
+            first_name:firstName,
+            last_name:secondName,
+            email:email,
+            gender:gender,
+            username:userName,
+        }
+        setUsuarios([...usuarios,nuevoUsuarios]);
+        limpiarInputs();
+    }else{
+        alert(resError);
+    }
  }
 
 
@@ -49,42 +66,61 @@ function Formulario(){
 
     return res;
  }
+ const limpiarInputs = ()=>{
+    setFirstName('');
+    setSecondName('');
+    setEmail('');
+    setUserName('');
+    setGender('');
+ }
 
 
 
     return (
-        <div className = "w3-margin w3-border" style = {{maxWidth:'600px'}}>
-            <form onSubmit = {verDatos} className="w3-container">
+        <div className = "w3-margin w3-border" style = {{maxWidth:'400px'}}>
+            <form onSubmit = {agregar} className="w3-container">
                 <label  className="w3-container">
                     First Name: 
                     <input 
                         className = "w3-right" 
                         type = "text" 
                         value = {firstName} 
+                        placeholder = "Enter your first name"
                         onChange = {
                             (e)=>{
-                            setFirstName(e.target.value); 
-                            setErrores(verNames(e.target.value)?{...errores,firstName:false}:{...errores,firstName:true});
+                                setFirstName(e.target.value); 
+                                setErrores(
+                                    verNames(e.target.value)?
+                                    {...errores,firstName:false}:
+                                    {...errores,firstName:true}
+                                );
                             }
                         }
                         style = {errores.firstName?{color:'red'}:{color:'green'}} 
+                        ref = {input}
                         
                     />
                 </label>
                 <br />
                 <label  className = "w3-container">
-                    Second Name: 
+                    Last Name: 
                     <input 
                         className = "w3-right" 
                         type = "text" 
                         value = {secondName}
+                        placeholder = "Enter your last name"
                         onChange = {
                             (e)=>{
                                 setSecondName(e.target.value); 
-                                setErrores(verNames(e.target.value)?{...errores,secondName:false}:{...errores,secondName:true});
+                                setErrores(
+                                    verNames(e.target.value)?
+                                    {...errores,secondName:false}:
+                                    {...errores,secondName:true}
+                                );
                             }
                         }
                         style = {errores.secondName?{color:'red'}:{color:'green'}}
+                        
                         
                     />
                 </label>
@@ -95,6 +131,7 @@ function Formulario(){
                         className = "w3-right" 
                         type = "email"
                         value = {email}
+                        placeholder = "Enter your email"
                         onChange = {(e)=>setEmail(e.target.value)} 
                     />
                 </label>
@@ -105,6 +142,7 @@ function Formulario(){
                         className = "w3-right" 
                         type = "text"
                         value = {userName}
+                        placeholder = "Enter a user name"
                         onChange = {(e)=>setUserName(e.target.value)} 
                     />
                 </label>
@@ -117,7 +155,6 @@ function Formulario(){
                         value = {gender}
                         onChange = {(e)=>setGender(e.target.value)}
                         >
-                            <option value=""></option>
                             <option value="female">Female</option>
                             <option value="male">Male</option>
                             <option value="agender">Agender</option>
@@ -126,7 +163,7 @@ function Formulario(){
                     </select>
                 </label>
                 <label className="w3-container">
-                    <input className="w3-container" type="submit" value = "Enviar"  ref = {disabled}/>
+                    <input className="w3-container" type="submit" value = "Agregar"  ref = {disabled}/>
                 </label>
             </form>
         </div>

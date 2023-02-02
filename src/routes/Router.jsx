@@ -7,7 +7,7 @@ import Formulario from "../components/formulario/formulario";
 function Router(){
     return (
         <Routes>
-            <Route path="/" element={<Formulario/>}/>
+            <Route path="/" element={<Home/>}/>
             <Route path="/info" element={<Info/>}/>
             <Route path="/lista" element={<PageLista/>} />
         </Routes>

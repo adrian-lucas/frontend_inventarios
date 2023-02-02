@@ -4,6 +4,7 @@ import NavBar from "../components/navBar/navBar";
 import Lista from "../components/lista/lista";
 
 function PageLista(){
+    
     return(
         <div>
             <Lista/>
