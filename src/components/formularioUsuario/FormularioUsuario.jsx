@@ -1,6 +1,6 @@
 import { useState,useEffect,useRef } from "react";
 
-function Formulario({usuarios,setUsuarios}){
+function FormularioUsuario({usuarios,setUsuarios}){
  const [firstName, setFirstName] = useState('');
  const [secondName,setSecondName] = useState('');
  const [email, setEmail] = useState('');
@@ -169,4 +169,4 @@ function Formulario({usuarios,setUsuarios}){
         </div>
     );
 }
-export default Formulario;
+export default FormularioUsuario;
