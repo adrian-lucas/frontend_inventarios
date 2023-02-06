@@ -12,17 +12,9 @@ const ApiServices = {
         return response;
     },
     
-    registrarProducto:async ()=>{
+    registrarProducto:async (producto)=>{
         let response ={};
-        await API.post('producto/register',
-            {
-                nombre:'monitor',
-                descripcion:'23 pulgadas',
-                precio:'200',
-                stock:'100',
-                marca_id:'383',
-                seccion_id:'8',
-            })
+        await API.post('producto/register',producto)
             .then((res)=>{response=res})
             .catch((error)=>{
                 response=error.response?error.response:{};
@@ -51,7 +43,27 @@ const ApiServices = {
             console.log(error);
         })
         return response;
-    }
+    },
+    getMarcas:async()=>{
+        let response = {};
+        await API.get('marca/view-all-brands')
+        .then((res)=>{response=res})
+        .catch((error)=>{
+            response = error.response?error.response:{};
+            console.log(error);
+        });
+        return response;
+    },
+    getSecciones:async()=>{
+        let response = {};
+        await API.get('seccion/view-all-seccions')
+        .then((res)=>{response=res})
+        .catch((error)=>{
+            response = error.response?error.response:{};
+            console.log(error);
+        });
+        return response;
+    },
     
 }
 export default ApiServices;
