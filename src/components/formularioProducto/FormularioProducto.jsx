@@ -1,21 +1,31 @@
 import ApiServices from "../../services/api.services";
 import { useEffect, useRef, useState } from "react";
+import { useHref } from "react-router-dom";
 
-function FormularioProducto(){
+function FormularioProducto({productoAModificar,modificarProducto}){
+    const productoVacio =    
+    {
+        nombre : '',
+        descripcion : '',
+        precio : '',
+        stock : '',
+        marca_id : '',
+        seccion_id : '',
+    }
+
     useEffect(() => {
      getMarcas();
      getSecciones();
     }, [])
-    
+ 
+    const [producto, setProducto] = useState(productoVacio);
     const [marcas, setMarcas] = useState([]);
     const [secciones, setSecciones] = useState([]);
+
+    if(modificarProducto){
+        setProducto(productoAModificar);
+    }
     
-    const  nombre = useRef(null);
-    const descripcion = useRef(null);
-    const precio = useRef(null);
-    const stock = useRef(null);
-    const marca = useRef(null);
-    const seccion = useRef(null);
     
     const getMarcas = async()=>{
         const response = await ApiServices.getMarcas();
@@ -26,6 +36,7 @@ function FormularioProducto(){
             console.log('no se obtuvieron las marcas');
         }
     }
+
     const getSecciones = async()=>{
         const response = await ApiServices.getSecciones();
         if(response.status === 200){
@@ -34,64 +45,96 @@ function FormularioProducto(){
             console.log('no se obtuvieron las seccioens');
         }
     }
+
     const registrar = async(e)=>{
         e.preventDefault();
-        const response = await ApiServices.registrarProducto(getData());
-        console.log(marca.current);
+        const response = await ApiServices.registrarProducto(producto);
+        console.log(producto);
         if(response.status === 201){
             console.log(response.data.data);
+            setProducto(productoVacio);
             
         }else{
             console.log('el producto no se registró');
         }
     }
-    const getData = ()=>{
-        return{
-            nombre : nombre.current.value,
-            descripcion : descripcion.current.value,
-            precio : precio.current.value,
-            stock : stock.current.value,
-            marca_id : marca.current.id,
-            seccion_id : seccion.current.id,
-        }
+    const modificar = async()=>{
+        
     }
+
     
     return (
         <div className="w3-container w3-border w3-margin" style={{width:'500px'}}>
             <form className="w3-container" onSubmit={registrar}>
                 <label className="w3-container">
                     Nombre:
-                    <textarea className="w3-right" name="" id="" cols="20" rows="2" ref={nombre}></textarea>
+                    <textarea 
+                    className="w3-right" 
+                    cols="20" 
+                    rows="2" 
+                    value={producto.nombre}
+                    onChange ={(e)=>setProducto({...producto,nombre:e.target.value})} 
+                    required>
+                    </textarea>
                 </label>
                 <label className="w3-container">
                     Descripcion:
-                    <textarea className="w3-right" name="" id="" cols="20" rows="2" ref={descripcion}></textarea>
+                    <textarea 
+                    className="w3-right" 
+                    cols="20" 
+                    rows="2" 
+                    value={producto.descripcion}
+                    onChange ={(e)=>setProducto({...producto,descripcion:e.target.value})}
+                    required>
+                    </textarea>
                 </label>
                 <label className="w3-container">
                     Precio:
-                    <input className="w3-right" type="number" ref={precio}/>
+                    <input 
+                    className="w3-right" 
+                    type="number" 
+                    value={producto.precio}
+                    onChange ={(e)=>setProducto({...producto,precio:e.target.value})}
+                    required/>
                 </label>
                 
                 <label className="w3-container">
                     Stock: 
-                    <input className="w3-right" type="number"  ref={stock}/>
+                    <input 
+                    className="w3-right" 
+                    type="number"  
+                    value={producto.stock}
+                    onChange ={(e)=>setProducto({...producto,stock:e.target.value})}
+                    required/>
                 </label>
                 <label className="w3-container">
                     Marca:
-                    <select className="w3-right" name="Marcas" id="" ref={marca} >
+                    <select 
+                    className="w3-right" 
+                    name="Marcas" 
+                    value={producto.marca_id}
+                    onChange ={(e)=>setProducto({...producto,marca_id:e.target.value})}
+                    required>
+                        <option value="">Elija una marca</option>
                         {
                             marcas.map((m)=>{
-                                return <option key={m.id} id={m.id}>{m.nombre}</option>
+                                return <option key={m.id} value = {m.id}>{m.nombre}</option>
                             })
                         }
                     </select>
                 </label>
                 <label className="w3-container">
                     Seccion:
-                    <select className="w3-right" name="Secciones" id="" ref={seccion}>
+                    <select 
+                    className="w3-right" 
+                    name="Secciones" 
+                    value={producto.seccion_id}
+                    onChange ={(e)=>setProducto({...producto,seccion_id:e.target.value})}
+                    required>
+                        <option value="">Elija un seccion</option>
                         {
                             secciones.map((s)=>{
-                                return <option key={s.id} id={s.id}>{s.codigo}</option>
+                                return <option key={s.id} value = {s.id}>{s.codigo}</option>
                             })
                         }
                     </select>
@@ -99,12 +142,9 @@ function FormularioProducto(){
                 <div className="w3-container w3-margin w3-center">
                    <input className=""  type="submit" value="Registrar" /> 
                 </div>
-                
-                
-
                
             </form>
-            <button onClick={registrar}>imprimir</button>
+            
         </div>
     );
 }

@@ -2,9 +2,7 @@ import data from '../../mockdata_usuarios.json';
 import '../../styles/tabla.css'
 import Tarjeta from '../tarjeta/tarjeta';
 import { useRef,useState} from 'react';
-import Formulario from '../formularioUsuario/FormularioUsuario';
 
-//let cantUsuarios = 10;
 function TablaUsuarios({usuarios,setUsuarios}){
     const divRef = useRef(); 
     
@@ -12,7 +10,6 @@ function TablaUsuarios({usuarios,setUsuarios}){
     const [user,setUser] = useState(null);
 
     const agregarUsuario = ()=>{
-        //console.log(cantUsuarios);
         setUsuarios([...usuarios,data[usuarios.length]]);
     }
     const mostrarTarjeta = (u)=>{

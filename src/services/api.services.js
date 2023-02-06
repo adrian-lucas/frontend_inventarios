@@ -34,9 +34,9 @@ const ApiServices = {
         });
         return response;
     },
-    eliminarProducto:async()=>{
+    eliminarProducto:async(id)=>{
         let response = {};
-        await API.delete('producto/remove?id=1011')
+        await API.delete('producto/remove?id='+id)
         .then((res)=>{response=res})
         .catch((error)=>{
             response=error.response?error.response:{};

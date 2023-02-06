@@ -38,6 +38,7 @@ function FormularioUsuario({usuarios,setUsuarios}){
     
     if(valido){
         const nuevoUsuarios = {
+            id: Math.floor(Math.random())*150,
             first_name:firstName,
             last_name:secondName,
             email:email,
@@ -155,11 +156,11 @@ function FormularioUsuario({usuarios,setUsuarios}){
                         value = {gender}
                         onChange = {(e)=>setGender(e.target.value)}
                         >
-                            <option value="female">Female</option>
-                            <option value="male">Male</option>
-                            <option value="agender">Agender</option>
-                            <option value="fluid">Fluid</option>
-                            <option value="other">Other</option>
+                            <option value="female" key='1'>Female</option>
+                            <option value="male" key='2'>Male</option>
+                            <option value="agender" key='3'>Agender</option>
+                            <option value="fluid" key='4'>Fluid</option>
+                            <option value="other" key='5'>Other</option>
                     </select>
                 </label>
                 <label className="w3-container">
