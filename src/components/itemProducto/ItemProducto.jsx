@@ -1,13 +1,16 @@
 import { useState } from "react";
 import ApiServices from "../../services/api.services";
-import Pregunta from "../aviso/aviso";
-function ItemProducto({producto,setItemVisible,seElimino,setSeElimino}){
+import Pregunta from "../pregunta/Pregunta";
+import FormularioProducto from "../formularioProducto/FormularioProducto";
+function ItemProducto({producto,setItemVisible,actualizar,setActualizar}){
     const [preguntar, setPreguntar] = useState(false);
-    const eliminar = async()=>{
+    const [modificar, setModificar] = useState(false);
+
+    const eliminarProducto = async()=>{
         const response = await ApiServices.eliminarProducto(producto.id);
         if(response.status === 200){
             console.log('se elimino');
-            setSeElimino(!seElimino);
+            setActualizar(!actualizar);
         }else{
             console.log('no se eliminoooooo');
         }
@@ -17,20 +20,34 @@ function ItemProducto({producto,setItemVisible,seElimino,setSeElimino}){
         
         <div className="w3-modal" style={{display:'block'}}>
             <div className="w3-modal-content w3-card w3-animate-zoom w3-display-content w3-padding">
-                <div>{preguntar?<Pregunta eliminar = {eliminar} setPreguntar = {setPreguntar} setItemVisible = {setItemVisible}/>:null}</div>
+                <div>
+                    {preguntar?<Pregunta eliminar = {eliminarProducto} setPreguntar = {setPreguntar} setItemVisible = {setItemVisible}/>:null}
+                    {modificar?<FormularioProducto productoAModificar= {producto} modificar={false}/>:null}
+                </div>
                 <span onClick={()=>setItemVisible(false)} className="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                <h5>Producto: {producto.nombre}</h5>
-                <div>Descripcion: {producto.descripcion}</div>
-                <span>Precio: {producto.precio}</span>
-                <span>Stock: {producto.stock}</span><br />
-                <span>Fecha creacion: {producto.fecha_creacion}</span>
-                <span>Fecha actualizacion: {producto.fecha_actualizacion}</span><br />
-                <span>Marca: {producto.marca_id}</span>
-                <span>Seccion: {producto.seccion_id}</span>
+                <h5><b>Producto: </b> {producto.nombre}</h5>
+                <div><b>Descripcion: </b>{producto.descripcion}</div>
+                <div className="w3-row" >
+                <span className="w3-half"><b>Precio: </b>{producto.precio}</span>
+                <span className="w3-half"><b>Stock: </b> {producto.stock}</span><br />
+                
+                <span className="w3-half"><b>Fecha creacion: </b> {producto.fecha_creacion.slice(0,10)}</span>
+                <span className="w3-half"><b>Fecha actualizacion: </b> {producto.fecha_actualizacion?producto.fecha_actualizacion.slice(0,10):''}</span><br />
+                <span className="w3-half"><b>Marca: </b>{producto.marca}</span>
+                <span className="w3-half"><b>Seccion: </b> {producto.seccion}</span>
+                </div>
                 <br />
                 <div className="w3-margin w3-center">
-                    <button className="w3-margin w3-green w3-round">Modificar</button>
-                    <button className="w3-margin w3-red  w3-round" onClick={()=>setPreguntar(true)}>Eliminar</button>
+                    <button 
+                        className="w3-margin w3-green w3-round" 
+                        onClick={()=>setModificar(true)}>
+                        Modificar
+                    </button>
+                    <button 
+                        className="w3-margin w3-red  w3-round" 
+                        onClick={()=>setPreguntar(true)}>
+                        Eliminar
+                    </button>
                     
                 </div>
             </div>

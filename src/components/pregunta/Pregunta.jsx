@@ -6,11 +6,13 @@ function Pregunta({eliminar,setPreguntar,setItemVisible}){
                 <div className="w3-center">
                     <button 
                      className="w3-margin w3-green" 
-                     onClick={()=> setPreguntar(false)}>Cancelar
+                     onClick={()=> setPreguntar(false)}>
+                        Cancelar
                     </button>
                     <button 
                      className="w3-margin w3-red"
-                     onClick={()=> {setPreguntar(false);eliminar();setItemVisible()}}>Eliminar
+                     onClick={()=> {setPreguntar(false);eliminar();setItemVisible()}}>
+                        Eliminar
                     </button>
                    
                 </div>

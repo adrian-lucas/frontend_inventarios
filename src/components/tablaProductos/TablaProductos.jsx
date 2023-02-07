@@ -1,40 +1,26 @@
 import { useEffect, useState } from "react";
 import ItemProducto from "../itemProducto/ItemProducto";
-import ApiServices from "../../services/api.services";
-function TablaProductos(){
-    
-    const [productos,setProductos] = useState([]);
+function TablaProductos({listaProductos,actualizar,setActualizar}){
     const [itemVisible, setItemVisible] = useState(false);
     const [producto, setProducto] = useState({});
-    const [seElimino, setSeElimino] = useState(false);
-
-    useEffect(() => {
-        obtenerProductos();
-    }, []);
-    useEffect(() => {
-        obtenerProductos();
-    }, [seElimino]);
     
-    const obtenerProductos = async()=>{
-        const response = await ApiServices.getProductos();
-        if(response.status === 200){
-            console.log(response.data.data);
-            setProductos(response.data.data);
-            //console.log(productos);
-        }else{
-            console.log('no se obtuvieron los productos')
-        }
-    }
     const mostrarItem = (p)=>{
-        setItemVisible(p);
+        setItemVisible(true);
         setProducto(p);
     }
     return(
         <div className="">
             <div>
-                {itemVisible?<ItemProducto producto={producto} setItemVisible = {setItemVisible} setSeElimino = {setSeElimino} seElimino = {seElimino}/>:null}
+                {itemVisible
+                    ?<ItemProducto 
+                    producto={producto} 
+                    setItemVisible = {setItemVisible} 
+                    actualizar = {actualizar} 
+                    setActualizar = {setActualizar}/>
+                    :null
+                }
             </div>
-            <table className="w3-table w3-striped w3-hoverable">
+            <table className="w3-table w3-striped w3-hoverable w3-margin">
             <tbody >
                 <tr className='w3-blue-grey' key={'cabecera'}>
                     <td>Nombre</td>
@@ -42,7 +28,7 @@ function TablaProductos(){
                     <td>Stock</td>
                     <td>Seccion</td>
                 </tr>
-                {productos.map(
+                {listaProductos.map(
                     (p)=>{
                         return(
                             <tr onClick={()=>mostrarItem(p)} key={p.id}>

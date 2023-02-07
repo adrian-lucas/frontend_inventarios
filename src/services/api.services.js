@@ -1,8 +1,8 @@
 import { API } from "./conection";
 const ApiServices = {
-    getProductos:async ()=>{
+    getProductos:async (pagina)=>{
         let response ={};
-        await API.get('producto/view-pagination')
+        await API.get('producto/view-pagination?pageSize=15page='+pagina,{params:{},data:{}})
             .then((res)=>{response=res})
             .catch((error)=>{
                 response = error.response?error.response:{};
@@ -24,9 +24,9 @@ const ApiServices = {
         return response;
     },
 
-    modificarProducto:async ()=>{
+    modificarProducto:async (id,cuerpo)=>{
         let response = {};
-        await API.put('producto/change-data?id=1011',{nombre:'sockets'})
+        await API.put('producto/change-data?id='+id,cuerpo)
         .then((res)=>{response=res})
         .catch((error)=>{
             response=error.response?error.response:{};

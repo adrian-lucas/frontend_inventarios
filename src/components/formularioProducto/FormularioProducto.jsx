@@ -2,7 +2,7 @@ import ApiServices from "../../services/api.services";
 import { useEffect, useRef, useState } from "react";
 import { useHref } from "react-router-dom";
 
-function FormularioProducto({productoAModificar,modificarProducto}){
+function FormularioProducto({modificar,productoAModificar}){
     const productoVacio =    
     {
         nombre : '',
@@ -16,14 +16,16 @@ function FormularioProducto({productoAModificar,modificarProducto}){
     useEffect(() => {
      getMarcas();
      getSecciones();
-    }, [])
+    }, []);
+    
  
-    const [producto, setProducto] = useState(productoVacio);
+    const [producto, setProducto] = useState(productoAModificar);
     const [marcas, setMarcas] = useState([]);
     const [secciones, setSecciones] = useState([]);
 
-    if(modificarProducto){
+    if(modificar){
         setProducto(productoAModificar);
+        console.log(producto);
     }
     
     
@@ -46,26 +48,42 @@ function FormularioProducto({productoAModificar,modificarProducto}){
         }
     }
 
-    const registrar = async(e)=>{
+    const registrarProducto = async(e)=>{
         e.preventDefault();
         const response = await ApiServices.registrarProducto(producto);
-        console.log(producto);
+        //console.log(producto);
         if(response.status === 201){
             console.log(response.data.data);
-            setProducto(productoVacio);
+            setProducto({});
             
         }else{
             console.log('el producto no se registró');
         }
     }
-    const modificar = async()=>{
+    const modificarProducto = async(e)=>{
+        e.preventDefault();
+        const response = await ApiServices.modificarProducto(producto.id,producto);
+        if(response.status === 201) {
+            console.log(response.data.data);
+            setProducto({});
+        }else{
+            console.log('no se modifico el producto');
+        }
         
+    }
+
+    const handlerSubmit = (e)=>{
+        if(productoAModificar === {}){
+            registrarProducto(e);
+        }else{
+            modificarProducto(e);
+        }
     }
 
     
     return (
         <div className="w3-container w3-border w3-margin" style={{width:'500px'}}>
-            <form className="w3-container" onSubmit={registrar}>
+            <form className="w3-container" onSubmit={handlerSubmit}>
                 <label className="w3-container">
                     Nombre:
                     <textarea 
@@ -140,7 +158,7 @@ function FormularioProducto({productoAModificar,modificarProducto}){
                     </select>
                 </label>
                 <div className="w3-container w3-margin w3-center">
-                   <input className=""  type="submit" value="Registrar" /> 
+                   <input className=""  type="submit" value="Enviar" /> 
                 </div>
                
             </form>
