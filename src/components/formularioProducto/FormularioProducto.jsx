@@ -3,15 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { useHref } from "react-router-dom";
 
 function FormularioProducto({modificar,productoAModificar}){
-    const productoVacio =    
-    {
-        nombre : '',
-        descripcion : '',
-        precio : '',
-        stock : '',
-        marca_id : '',
-        seccion_id : '',
-    }
 
     useEffect(() => {
      getMarcas();
@@ -82,7 +73,7 @@ function FormularioProducto({modificar,productoAModificar}){
 
     
     return (
-        <div className="w3-container w3-border w3-margin" style={{width:'500px'}}>
+        <div className="w3-container w3-border w3-margin" style={{maxWidth:'500px'}}>
             <form className="w3-container" onSubmit={handlerSubmit}>
                 <label className="w3-container">
                     Nombre:

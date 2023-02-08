@@ -4,20 +4,22 @@ import TablaProductos from "../components/tablaProductos/TablaProductos";
 import BarraPagination from "../components/barraPaginacion/BarraPaginacion";
 import ApiServices from "../services/api.services";
 function PageProductos(){
-    
+    //no funciona cuando cabiamos el orden en barraNavegacion y tabla productos  
     const [infoPagination, setInfoPaginacion] = useState({});
     const [listaProductos, setListaProductos] = useState([]);
     const [actualizar, setActualizar] = useState(false);
     const [pagina, setPagina] = useState(1);
 
-   
     useEffect(() => {
-        obtenerProductos();
-    }, [actualizar,pagina])
+      obtenerProductos();
+    }, [actualizar]);
     
+    const actualizarTabla = ()=>{
+        setActualizar(!actualizar);
+    }
 
-    const obtenerProductos = async()=>{
-        const response = await ApiServices.getProductos();
+    const obtenerProductos = async ()=>{
+        const response = await ApiServices.getProductos(pagina);
         if(response.status === 200){
             //console.log(response.data.data);
             //console.log(response.data.pagination)
@@ -29,16 +31,14 @@ function PageProductos(){
         }
     }
     
-    
-
     return (
         <div>
             <div className="w3-third">
                 <FormularioProducto modificar = {false} productoAModificar = {{}}/>
             </div>
             <div className="w3-twothird">
-                <TablaProductos listaProductos={listaProductos} actualizar ={actualizar} setActualizar = {setActualizar}/>
-                <BarraPagination infoPagination = {infoPagination} />
+                <BarraPagination infoPagination = {infoPagination} pagina={pagina} setPagina = {setPagina} actualizarTabla = {actualizarTabla}/>
+                <TablaProductos listaProductos={listaProductos} actualizar ={actualizar} setActualizar = {setActualizar}/>  
             </div>
         </div>
     )

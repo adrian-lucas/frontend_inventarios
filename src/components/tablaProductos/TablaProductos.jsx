@@ -11,7 +11,8 @@ function TablaProductos({listaProductos,actualizar,setActualizar}){
     return(
         <div className="">
             <div>
-                {itemVisible
+                {
+                    itemVisible
                     ?<ItemProducto 
                     producto={producto} 
                     setItemVisible = {setItemVisible} 
