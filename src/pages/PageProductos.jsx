@@ -4,11 +4,10 @@ import TablaProductos from "../components/tablaProductos/TablaProductos";
 import BarraPagination from "../components/barraPaginacion/BarraPaginacion";
 import ApiServices from "../services/api.services";
 function PageProductos(){
-    //no funciona cuando cabiamos el orden en barraNavegacion y tabla productos  
-    const [infoPagination, setInfoPaginacion] = useState({});
     const [listaProductos, setListaProductos] = useState([]);
     const [actualizar, setActualizar] = useState(false);
     const [pagina, setPagina] = useState(1);
+    const [infoPagination, setInfoPaginacion] = useState({});
 
     useEffect(() => {
       obtenerProductos();
@@ -21,11 +20,8 @@ function PageProductos(){
     const obtenerProductos = async ()=>{
         const response = await ApiServices.getProductos(pagina);
         if(response.status === 200){
-            //console.log(response.data.data);
-            //console.log(response.data.pagination)
             setListaProductos(response.data.data);
             setInfoPaginacion(response.data.pagination);
-            
         }else{
             console.log('no se obtuvieron los productos')
         }
@@ -34,11 +30,24 @@ function PageProductos(){
     return (
         <div>
             <div className="w3-third">
-                <FormularioProducto modificar = {false} productoAModificar = {{}}/>
+                <h4 className="w3-center">Registrar Nuevo Producto</h4>
+                <FormularioProducto 
+                    modificar = {false} 
+                    productoAModificar = {null}
+                    actualizarTabla = {actualizarTabla}
+                />
             </div>
             <div className="w3-twothird">
-                <BarraPagination infoPagination = {infoPagination} pagina={pagina} setPagina = {setPagina} actualizarTabla = {actualizarTabla}/>
-                <TablaProductos listaProductos={listaProductos} actualizar ={actualizar} setActualizar = {setActualizar}/>  
+                <h4 className="w3-center">Productos</h4>
+                <TablaProductos 
+                    listaProductos = {listaProductos} 
+                    actualizarTabla = {actualizarTabla}
+                />      
+                <BarraPagination 
+                    infoPagination = {infoPagination} 
+                    setPagina = {setPagina} 
+                    actualizarTabla = {actualizarTabla}
+                />
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import ItemProducto from "../itemProducto/ItemProducto";
-function TablaProductos({listaProductos,actualizar,setActualizar}){
+function TablaProductos({listaProductos,actualizarTabla}){
     const [itemVisible, setItemVisible] = useState(false);
     const [producto, setProducto] = useState({});
     
@@ -16,8 +16,7 @@ function TablaProductos({listaProductos,actualizar,setActualizar}){
                     ?<ItemProducto 
                     producto={producto} 
                     setItemVisible = {setItemVisible} 
-                    actualizar = {actualizar} 
-                    setActualizar = {setActualizar}/>
+                    actualizarTabla = {actualizarTabla}/>
                     :null
                 }
             </div>

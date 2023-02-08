@@ -2,7 +2,7 @@ import { useState } from "react";
 import ApiServices from "../../services/api.services";
 import Pregunta from "../pregunta/Pregunta";
 import FormularioProducto from "../formularioProducto/FormularioProducto";
-function ItemProducto({producto,setItemVisible,actualizar,setActualizar}){
+function ItemProducto({producto,setItemVisible,actualizarTabla}){
     const [preguntar, setPreguntar] = useState(false);
     const [modificar, setModificar] = useState(false);
 
@@ -10,7 +10,7 @@ function ItemProducto({producto,setItemVisible,actualizar,setActualizar}){
         const response = await ApiServices.eliminarProducto(producto.id);
         if(response.status === 200){
             console.log('se elimino');
-            setActualizar(!actualizar);
+            actualizarTabla();
         }else{
             console.log('no se eliminoooooo');
         }
@@ -21,8 +21,18 @@ function ItemProducto({producto,setItemVisible,actualizar,setActualizar}){
         <div className="w3-modal" style={{display:'block'}}>
             <div className="w3-modal-content w3-card w3-animate-zoom w3-display-content w3-padding">
                 <div>
-                    {preguntar?<Pregunta eliminar = {eliminarProducto} setPreguntar = {setPreguntar} setItemVisible = {setItemVisible}/>:null}
-                    {modificar?<FormularioProducto productoAModificar= {producto} modificar={false}/>:null}
+                    {preguntar?<Pregunta 
+                    eliminar       = {eliminarProducto} 
+                    setPreguntar   = {setPreguntar} 
+                    setItemVisible = {setItemVisible}
+                    />:null}
+
+                    {modificar?<FormularioProducto 
+                    productoAModificar = {producto} 
+                    modificar          = {true} 
+                    actualizarTabla    = {actualizarTabla} 
+                    setItemVisible     = {setItemVisible}
+                    />:null}
                 </div>
                 <span onClick={()=>setItemVisible(false)} className="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
                 <h5><b>Producto: </b> {producto.nombre}</h5>

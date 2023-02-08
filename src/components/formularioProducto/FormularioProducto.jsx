@@ -1,30 +1,22 @@
 import ApiServices from "../../services/api.services";
-import { useEffect, useRef, useState } from "react";
-import { useHref } from "react-router-dom";
+import { useEffect,useState } from "react";
 
-function FormularioProducto({modificar,productoAModificar}){
-
+function FormularioProducto({modificar,productoAModificar,actualizarTabla,setItemVisible}){
+    
     useEffect(() => {
      getMarcas();
      getSecciones();
     }, []);
-    
- 
-    const [producto, setProducto] = useState(productoAModificar);
+    const valoresVacios = {nombre:'',descripcion:'',precio:'',stock:'',marca_id:'',seccion_id:''};
+    const iniciales = productoAModificar==null?valoresVacios:productoAModificar
+    const [producto, setProducto] = useState(iniciales);
     const [marcas, setMarcas] = useState([]);
     const [secciones, setSecciones] = useState([]);
-
-    if(modificar){
-        setProducto(productoAModificar);
-        console.log(producto);
-    }
-    
     
     const getMarcas = async()=>{
         const response = await ApiServices.getMarcas();
         if(response.status === 200){
             setMarcas(response.data.data);
-            //console.log(response.data.data);
         }else{
             console.log('no se obtuvieron las marcas');
         }
@@ -42,29 +34,37 @@ function FormularioProducto({modificar,productoAModificar}){
     const registrarProducto = async(e)=>{
         e.preventDefault();
         const response = await ApiServices.registrarProducto(producto);
-        //console.log(producto);
         if(response.status === 201){
             console.log(response.data.data);
-            setProducto({});
+            actualizarTabla();
+            limpiarCampos();
             
         }else{
             console.log('el producto no se registró');
         }
     }
+
     const modificarProducto = async(e)=>{
         e.preventDefault();
         const response = await ApiServices.modificarProducto(producto.id,producto);
         if(response.status === 201) {
             console.log(response.data.data);
-            setProducto({});
+            actualizarTabla();
+            setItemVisible(false);
+            
         }else{
             console.log('no se modifico el producto');
         }
         
     }
+    const limpiarCampos =()=>{
+        setProducto({nombre:'',descripcion:'',precio:'',stock:'',marca_id:'',seccion_id:''})
+    }
 
     const handlerSubmit = (e)=>{
-        if(productoAModificar === {}){
+        console.log('producto a modificar:',productoAModificar);
+        if(productoAModificar===null){ //no reconoce el el objeto vacio{}
+            
             registrarProducto(e);
         }else{
             modificarProducto(e);
