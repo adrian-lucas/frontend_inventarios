@@ -64,7 +64,6 @@ function FormularioProducto({modificar,productoAModificar,actualizarTabla,setIte
     const handlerSubmit = (e)=>{
         console.log('producto a modificar:',productoAModificar);
         if(productoAModificar===null){ //no reconoce el el objeto vacio{}
-            
             registrarProducto(e);
         }else{
             modificarProducto(e);

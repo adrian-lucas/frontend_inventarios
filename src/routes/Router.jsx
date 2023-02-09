@@ -3,9 +3,9 @@ import Home from "../pages/home";
 import Info from "../pages/info";
 import PageUsuarios from "../pages/PageUsuarios";
 import PageProductos from "../pages/PageProductos";
-import ItemProducto from "../components/itemProducto/ItemProducto";
 import TablaProductos from "../components/tablaProductos/TablaProductos";
-//import Tarjeta from "../components/tarjeta/tarjeta";
+import FormularioLogin from "../components/formularioLogin/FormularioLogin";
+import FormularioRegistro from "../components/formularioRegistro/FormularioRegistro";
 function Router(){
     return (
         <Routes>
@@ -14,6 +14,8 @@ function Router(){
             <Route path="/usuarios" element = {<PageUsuarios/>} />
             <Route path="/productos" element = {<PageProductos/>}/>
             <Route path="/prueba" element = {<TablaProductos/>}/>
+            <Route path="/login" element = {<FormularioLogin/>}/> 
+            <Route path="/registrar" element = {<FormularioRegistro/>}/>
         </Routes>
     );
 }

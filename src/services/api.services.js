@@ -2,7 +2,7 @@ import { API } from "./conection";
 const ApiServices = {
     getProductos:async (pagina)=>{
         let response ={};
-        await API.get('producto/view-pagination',{params:{pageSize:15,page:pagina}})
+        await API.get('producto/view-pagination',{params:{pageSize:15,page:pagina},headers:{authorization:'Bearer Zr2esjVc8O58XLNKLeHDaMNZGk_vFUwV'}})
             .then((res)=>{response=res})
             .catch((error)=>{
                 response = error.response?error.response:{};
