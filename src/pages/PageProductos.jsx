@@ -28,6 +28,7 @@ function PageProductos(){
     }
     
     return (
+        localStorage.length?
         <div>
             <div className="w3-third">
                 <h4 className="w3-center">Registrar Nuevo Producto</h4>
@@ -50,6 +51,7 @@ function PageProductos(){
                 />
             </div>
         </div>
+        : <div>Primero debe iniciar sesion</div>
     )
 }
 export default PageProductos;

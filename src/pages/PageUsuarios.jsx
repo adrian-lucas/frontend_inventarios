@@ -7,6 +7,7 @@ function PageUsuarios(){
     const [usuarios,setUsuarios] = useState(data.slice(0,10));
     
     return(
+        localStorage.length>0?
         <div className="w3-container w3-row w3-margin">
             <div className="w3-third">
                 <FormularioUsuario usuarios={usuarios} setUsuarios = {setUsuarios}/>
@@ -15,6 +16,7 @@ function PageUsuarios(){
                 <TablaUsuarios usuarios = {usuarios} setUsuarios = {setUsuarios}/>
             </div>
         </div>
+        : <div>Primero debe iniciar sesion</div>
     );
 }
 export default PageUsuarios;

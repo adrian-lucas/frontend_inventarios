@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ApiServicesUser from "../../services/api.servicesUser";
-function FormularioLogin({setLoginVisible}){
+
+function FormularioLogin({setSesionIniciada}){
     const dataUserEmpty = {username:'',password:''};
     const [dataUser, setDataUser] = useState(dataUserEmpty);
 
@@ -10,14 +11,18 @@ function FormularioLogin({setLoginVisible}){
         console.log(dataUser);
         if(response.status === 200){
             console.log(response.data);
+            setSesionIniciada(true);
+            localStorage.setItem("acces_token",response.data.acces_token);
+            //window.location.reload();
         }else{
             console.log('credenciales incorrectos')
+            
         }
     }
     
     return (
-        <div className="w3-modal" style={{display:'block'}}>
-            <div className="w3-modal-content w3-card w3-animate-left w3-display-content w3-padding">
+        <div className="w3-container w3-right w3-margin" style={{display:'block',with:'100'}}>
+            <div className="w3-card w3-display-content w3-padding">
             <form onSubmit={LogIn}>
                 <label>
                     Username: 
@@ -38,7 +43,6 @@ function FormularioLogin({setLoginVisible}){
                     required/>
                 </label><br /><br />
                 <input type="submit" value="Iniciar"/>
-                <input type="button" value="Cancelar"  onClick={()=>setLoginVisible(false)}/>
             </form>
             </div>
         </div>
