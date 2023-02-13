@@ -2,8 +2,9 @@ import Router from "./routes/Router";
 import NavBar from "./components/navBar/navBar";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-
+import { useSelector } from "react-redux";
 function App() {
+  const handlerLogin = useSelector((state)=>state.loginState.value);
   return (
     <div>
       <div> 
@@ -11,7 +12,7 @@ function App() {
        <NavBar/>
       </div>
       <div>
-        <Router />
+        <Router handlerLogin = {handlerLogin}/>
       </div>
 
       <div>

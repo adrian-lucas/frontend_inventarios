@@ -1,27 +1,36 @@
 import '../../styles/w3.css'
 import { Link } from 'react-router-dom';
 import FormularioRegistro from '../formularioRegistro/FormularioRegistro';
-import FormularioLogin from '../formularioLogin/FormularioLogin';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import {login, logout} from "../../app/features/loginState"
 function NavBar(){
+    const handlerLogin = useSelector((state)=>state.loginState.value);
+    const dispatch = useDispatch();
     const [registroVisible, setRegistroVisible] = useState(false);
-    const [sesionIniciada, setSesionIniciada] = useState(false);
-    
+    console.log(handlerLogin);
+   
     useEffect(() => {
-     setSesionIniciada(localStorage.getItem('acces_token')!==null);
-     //console.log(localStorage.getItem('acces_token'))
+        tokenValidate();
     }, [])
 
+    const tokenValidate=()=>{
+        if(localStorage.getItem('acces_token')!==null){
+           dispatch(login());
+        }else{
+            dispatch(logout());
+        }
+    }
     const cerrarSesion =()=>{
         localStorage.clear();
-        setSesionIniciada(false);
+       dispatch(logout());
     }
-    console.log(sesionIniciada);
+ 
     return(
         <div>
             <div className='w3-bar' style={{backgroundColor:'coral'}}>
             <Link className='w3-bar-item w3-hover-blue-grey w3-button' to= '/'>Home</Link>
-                {sesionIniciada?
+                {handlerLogin?
                 <div>
                 <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='/usuarios'>Usuarios</Link>
                 <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='productos'>Productos</Link>
@@ -33,7 +42,7 @@ function NavBar(){
                 null}
              {registroVisible?<FormularioRegistro setRegistroVisible={setRegistroVisible}/>:null}
             </div>
-            {!sesionIniciada?<FormularioLogin setSesionIniciada={setSesionIniciada}/>:null}
+            
         </div>
     )
 }

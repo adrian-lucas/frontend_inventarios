@@ -1,9 +1,15 @@
 import { useState } from "react";
 import ApiServicesUser from "../../services/api.servicesUser";
+import { useSelector, useDispatch } from "react-redux";
+import {login} from "../../app/features/loginState"
 
-function FormularioLogin({setSesionIniciada}){
+function FormularioLogin(){
+    const handlerLogin = useSelector((state)=>state.loginState.value);
+    const dispatch = useDispatch();
+
     const dataUserEmpty = {username:'',password:''};
     const [dataUser, setDataUser] = useState(dataUserEmpty);
+    
 
     const LogIn= async(e)=>{
         e.preventDefault();
@@ -11,12 +17,10 @@ function FormularioLogin({setSesionIniciada}){
         console.log(dataUser);
         if(response.status === 200){
             console.log(response.data);
-            setSesionIniciada(true);
             localStorage.setItem("acces_token",response.data.acces_token);
-            //window.location.reload();
+            dispatch(login());
         }else{
-            console.log('credenciales incorrectos')
-            
+            console.log('credenciales incorrectos')           
         }
     }
     

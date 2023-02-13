@@ -3,13 +3,14 @@ import Home from "../pages/home";
 import Info from "../pages/info";
 import PageUsuarios from "../pages/PageUsuarios";
 import PageProductos from "../pages/PageProductos";
-function Router(){
+import FormularioLogin from "../components/formularioLogin/FormularioLogin";
+function Router({handlerLogin}){
     return (
         <Routes>
             <Route path="/" element = {<Home/>}/>
             <Route path="/info" element = {<Info/>}/>
-            <Route path="/usuarios" element = {<PageUsuarios/>} />
-            <Route path="/productos" element = {<PageProductos/>}/>
+            <Route path="/usuarios" element = {handlerLogin?<PageUsuarios/>:<FormularioLogin/>} />
+            <Route path="/productos" element =  {handlerLogin?<PageProductos/>:<FormularioLogin/>}/>
         </Routes>
     );
 }
