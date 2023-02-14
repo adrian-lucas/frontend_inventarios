@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginState from "./features/loginState";
+import loginInfo from "./features/loginInfo";
 export default configureStore({
     reducer:{
-        loginState:loginState,
+        loginInfo:loginInfo,
     },
 })

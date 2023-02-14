@@ -1,8 +1,10 @@
-function Header(){
+function Header({userInfo}){
+    console.log(userInfo.nombres);
     return (
         <div>
             <header className="w3-blue-gray" style={{height:'50px'}}>
-                Sistema de inventarios
+                <span className="w3-left">Sistema de Inventarios</span>
+                <span className="w3-right">{userInfo.nombres}</span>
             </header>
         </div>
     );

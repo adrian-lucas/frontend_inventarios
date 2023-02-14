@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import FormularioLogin from "../components/formularioLogin/FormularioLogin";
 function Home(){
-    const handlerLogin = useSelector((state)=>state.loginState.value);
+    const activeSession = useSelector((state)=>state.loginInfo.session);
     const viewWithLogin = ()=>{
         return(<div>
             este es el home
@@ -11,7 +11,7 @@ function Home(){
     return (
 
         <div>
-            {handlerLogin?'este es el hombre': viewWithLogin()}
+            {activeSession?'este es el hombre': viewWithLogin()}
         </div>
     )
 }

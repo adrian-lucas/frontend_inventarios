@@ -1,8 +1,8 @@
 import store from "../app/store";
-import { logout } from "../app/features/loginState";
+import { logout } from "../app/features/loginInfo";
 import { API } from "./conection"
 const authHeader=()=>{
-    const access_token = localStorage.getItem('acces_token')===null?'':localStorage.getItem('acces_token');
+    const access_token = localStorage.getItem('access_token')===null?'':localStorage.getItem('access_token');
     return {authorization:`Bearer ${access_token}`}
 }
 export const GenericRequest = { 	
@@ -13,7 +13,7 @@ export const GenericRequest = {
         .catch(error => response = error.response ? error.response : {})     	
         if (response.status === 401) {      
             store.dispatch(logout());   	
-        console.log('no esta autorizado para ingresar')   	
+            console.log('no esta autorizado para ingresar')   	
         }     	
         return response 	
     }, 	

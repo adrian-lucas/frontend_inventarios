@@ -1,10 +1,9 @@
 import { useState } from "react";
 import ApiServicesUser from "../../services/api.servicesUser";
-import { useSelector, useDispatch } from "react-redux";
-import {login} from "../../app/features/loginState"
+import { useDispatch } from "react-redux";
+import {login,setUserInfo} from "../../app/features/loginInfo"
 
 function FormularioLogin(){
-    const handlerLogin = useSelector((state)=>state.loginState.value);
     const dispatch = useDispatch();
 
     const dataUserEmpty = {username:'',password:''};
@@ -16,11 +15,19 @@ function FormularioLogin(){
         const response = await ApiServicesUser.inicioSesion(dataUser);
         console.log(dataUser);
         if(response.status === 200){
-            console.log(response.data);
-            localStorage.setItem("acces_token",response.data.acces_token);
+            console.log(response.data.data);
+            localStorage.setItem("access_token",response.data.data.access_token);
+            
+            const data={
+                nombres:response.data.data.userInfo.nombres,
+                username:response.data.data.userInfo.username,
+                role:response.data.data.userInfo.role
+            }
+            console.log('userInfo proveniente de loginForm', response.data.data.userInfo);
+            dispatch(setUserInfo(response.data.data.userInfo));
             dispatch(login());
         }else{
-            console.log('credenciales incorrectos')           
+            console.log('credenciales incorrectos');           
         }
     }
     
