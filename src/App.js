@@ -23,8 +23,8 @@ function App() {
   return (
     <div>
       <div> 
-       <Header userInfo = {sessionInfo.userInfo}/>
-       <NavBar/>
+       <Header sessionInfo = {sessionInfo}/>
+      <NavBar sessionInfo = {sessionInfo}/>
       </div>
       <div>
         <Router activeSession = {sessionInfo.session}/>

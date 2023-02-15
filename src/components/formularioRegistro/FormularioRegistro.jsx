@@ -1,14 +1,13 @@
 import { useState } from "react";
 import ApiServicesUser from "../../services/api.servicesUser";
 function FormularioRegistro({setRegistroVisible}){
-    const userEmpty = {nombres:'',username:'',password:''};
+    const userEmpty = {nombres:'',username:'',password:'',role:''};
     const [dataUser, setDataUser] = useState(userEmpty);
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const registrarUsuario = async(e)=>{
         e.preventDefault();
         if(passwordConfirmation===dataUser.password){
             const response = await ApiServicesUser.registerUser(dataUser)
-            console.log(dataUser);
             if(response.status===201){
                 console.log('usuario registrado');
                 setDataUser(userEmpty);
@@ -18,7 +17,7 @@ function FormularioRegistro({setRegistroVisible}){
                
             }
         }else{
-            console.log('paswword no coiciden')
+            console.log('paswword no coicide')
         }
     }
 
@@ -63,6 +62,20 @@ function FormularioRegistro({setRegistroVisible}){
                     value={passwordConfirmation}
                     onChange={(e=>setPasswordConfirmation(e.target.value))}
                     required/>
+                </label><br /><br />
+                <label >
+                    UserRole:
+                    <select 
+                    className="w3-right" 
+                    value={dataUser.role}
+                    onChange ={(e)=>setDataUser({...dataUser,role:e.target.value})} 
+                    required>
+                        <option value="">Rol del nuevo usuario</option>
+                        <option value="SuperAdmin">SuperAdmin</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Espectador">Espectador</option>
+                    </select>
+
                 </label><br /><br />
                 <input type="submit" value="Registrar"/>
                 <input type="button" value="Cancelar"  onClick={()=>setRegistroVisible(false)}/>

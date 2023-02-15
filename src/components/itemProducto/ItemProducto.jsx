@@ -2,7 +2,10 @@ import { useState } from "react";
 import ApiServices from "../../services/api.services";
 import Pregunta from "../pregunta/Pregunta";
 import FormularioProducto from "../formularioProducto/FormularioProducto";
+import { useSelector } from "react-redux";
 function ItemProducto({producto,setItemVisible,actualizarTabla}){
+    const ESPECTADOR = 'Espectador';
+    const userRole = useSelector((state)=>state.loginInfo.userInfo.role);
     const [preguntar, setPreguntar] = useState(false);
     const [modificar, setModificar] = useState(false);
 
@@ -29,7 +32,6 @@ function ItemProducto({producto,setItemVisible,actualizarTabla}){
 
                     {modificar?<FormularioProducto 
                     productoAModificar = {producto} 
-                    modificar          = {true} 
                     actualizarTabla    = {actualizarTabla} 
                     setItemVisible     = {setItemVisible}
                     />:null}
@@ -47,19 +49,22 @@ function ItemProducto({producto,setItemVisible,actualizarTabla}){
                 <span className="w3-half"><b>Seccion: </b> {producto.seccion}</span>
                 </div>
                 <br />
+                {
+                userRole===ESPECTADOR?
+                null:
                 <div className="w3-margin w3-center">
                     <button 
-                        className="w3-margin w3-green w3-round" 
-                        onClick={()=>setModificar(true)}>
-                        Modificar
+                    className="w3-margin w3-green w3-round" 
+                    onClick={()=>setModificar(true)}>
+                    Modificar
                     </button>
                     <button 
-                        className="w3-margin w3-red  w3-round" 
-                        onClick={()=>setPreguntar(true)}>
-                        Eliminar
+                    className="w3-margin w3-red  w3-round" 
+                    onClick={()=>setPreguntar(true)}>
+                    Eliminar
                     </button>
-                    
                 </div>
+                }
             </div>
         </div>
     );

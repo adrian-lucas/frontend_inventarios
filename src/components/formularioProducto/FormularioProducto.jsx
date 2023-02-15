@@ -1,7 +1,7 @@
 import ApiServices from "../../services/api.services";
 import { useEffect,useState } from "react";
 
-function FormularioProducto({modificar,productoAModificar,actualizarTabla,setItemVisible}){
+function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible}){
     
     useEffect(() => {
      getMarcas();
@@ -58,12 +58,12 @@ function FormularioProducto({modificar,productoAModificar,actualizarTabla,setIte
         
     }
     const limpiarCampos =()=>{
-        setProducto({nombre:'',descripcion:'',precio:'',stock:'',marca_id:'',seccion_id:''})
+        setProducto(valoresVacios);
     }
 
     const handlerSubmit = (e)=>{
         console.log('producto a modificar:',productoAModificar);
-        if(productoAModificar===null){ //no reconoce el el objeto vacio{}
+        if(productoAModificar===null){ 
             registrarProducto(e);
         }else{
             modificarProducto(e);

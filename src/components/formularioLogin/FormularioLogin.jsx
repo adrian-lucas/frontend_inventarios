@@ -17,13 +17,6 @@ function FormularioLogin(){
         if(response.status === 200){
             console.log(response.data.data);
             localStorage.setItem("access_token",response.data.data.access_token);
-            
-            const data={
-                nombres:response.data.data.userInfo.nombres,
-                username:response.data.data.userInfo.username,
-                role:response.data.data.userInfo.role
-            }
-            console.log('userInfo proveniente de loginForm', response.data.data.userInfo);
             dispatch(setUserInfo(response.data.data.userInfo));
             dispatch(login());
         }else{
