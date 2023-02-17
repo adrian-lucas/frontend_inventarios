@@ -21,10 +21,7 @@ const FormikForm = () => (
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        console.log('propiedades de Setsubmitting',setSubmitting.arguments);
       }}
     >
       {({
@@ -88,10 +85,10 @@ const FormikForm = () => (
 
   {({ isSubmitting }) => (
     <Form>
-      <Field type="email" name="email" />
-      <ErrorMessage name="email" component="div" />
+      <Field  type="email" name="email" />
+      <ErrorMessage className="w3-text-red" name="email" component="div" />
       <Field type="password" name="password" />
-      <ErrorMessage name="password" component="div" />
+      <ErrorMessage className="w3-text-red" name="password" component="div" />
       <button type="submit" disabled={isSubmitting}>
         Submit
       </button>
