@@ -25,6 +25,9 @@ const ApiServices = {
     getSecciones:async()=>{
         return GenericRequest.get('seccion/view-all-seccions');
     },
+    guardarArchivo:async (archivo)=>{
+        return GenericRequest.postArchivo('file/save-file',archivo);
+    }
     
 }
 export default ApiServices;

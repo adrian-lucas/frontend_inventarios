@@ -1,9 +1,9 @@
 import store from "../app/store";
 import { logout } from "../app/features/loginInfo";
 import { API } from "./conection"
-const authHeader=()=>{
+const authHeader=(headers={})=>{
     const access_token = localStorage.getItem('access_token')===null?'':localStorage.getItem('access_token');
-    return {authorization:`Bearer ${access_token}`}
+    return {...headers,authorization:`Bearer ${access_token}`}
 }
 export const GenericRequest = { 	
     get: async (url, params={}) => {     	
@@ -21,6 +21,16 @@ export const GenericRequest = {
     post: async (url, data, params={}) => {     	
         let response = {}     	
         await API.post(url, data, { params, headers: authHeader() })         	
+        .then(res => response = res)         	
+        .catch(error => response = error.response ? error.response : {})     
+            if (response.status === 401) {         	
+        // Si no está autenticado hacer algo     	
+        }     	
+        return response 	
+    },
+    postArchivo: async (url, data, params={}) => {     	
+        let response = {}     	
+        await API.post(url, data, { params, headers: authHeader({'content-type': 'multipart/form-data'}) })         	
         .then(res => response = res)         	
         .catch(error => response = error.response ? error.response : {})     
             if (response.status === 401) {         	

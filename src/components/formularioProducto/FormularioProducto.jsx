@@ -1,5 +1,5 @@
 import ApiServices from "../../services/api.services";
-import { useEffect,useState } from "react";
+import { useEffect,useState,useRef } from "react";
 
 function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible}){
     
@@ -12,6 +12,8 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
     const [producto, setProducto] = useState(iniciales);
     const [marcas, setMarcas] = useState([]);
     const [secciones, setSecciones] = useState([]);
+    
+    const archivo = useRef();
     
     const getMarcas = async()=>{
         const response = await ApiServices.getMarcas();
@@ -57,6 +59,16 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
         }
         
     }
+    const guardarArchivo = async(e)=>{
+        e.preventDefault();
+        const response = await ApiServices.guardarArchivo({imageFile:archivo.current.files[0]});
+        if(response.status === 201){
+            console.log(response.data.link);
+        }else{
+            console.log('error al subir el archivo');
+        }
+
+    }
     const limpiarCampos =()=>{
         setProducto(valoresVacios);
     }
@@ -73,7 +85,7 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
     
     return (
         <div className="w3-container w3-border w3-margin" style={{maxWidth:'500px'}}>
-            <form className="w3-container" onSubmit={handlerSubmit}>
+            <form className="w3-container" onSubmit={guardarArchivo}>
                 <label className="w3-container">
                     Nombre:
                     <textarea 
@@ -147,6 +159,16 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
                         }
                     </select>
                 </label>
+                <label className="w3-container">
+                    Hoja de Datos:
+                    <input 
+                    className="w3-right" 
+                    type="file"
+                    accept=".pdf, jpeg, png"
+                    ref={archivo}
+                    />
+                </label>
+                
                 <div className="w3-container w3-margin w3-center">
                    <input className=""  type="submit" value="Enviar" /> 
                 </div>

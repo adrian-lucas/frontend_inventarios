@@ -21,16 +21,23 @@ function NavBar({sessionInfo}){
     return(
         <div>
             <div className='w3-bar' style={{backgroundColor:'coral'}}>
-            <Link className='w3-bar-item w3-hover-blue-grey w3-button' to= '/'>Home</Link>
+             <Link className='w3-bar-item w3-hover-blue-grey w3-button' to= '/'>Home</Link>
                 {activeSession?
                 <div>
-                <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='/usuarios'>Usuarios</Link>
-                <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='productos'>Productos</Link>
-                <div className='w3-right'>
-               {userRole=== SUPER_ADMIN?<button 
-               className='w3-button w3-hover-teal w3-blue w3-margin-left' onClick={()=>setRegistroVisible(true)}>Registrar</button>:null}
-                <Link className='w3-button w3-hover-teal w3-blue w3-margin-left' onClick={cerrarSesion} to='/'>Cerrar sesion</Link>
-                </div>
+                    <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='/usuarios'>Usuarios</Link>
+                    <Link className='w3-bar-item w3-hover-blue-grey w3-button' to='productos'>Productos</Link>
+
+                    <div className='w3-dropdown-hover w3-right'>
+                        <button className="w3-button">Menu</button>
+                       <div className='w3-dropdown-content w3-bar-block w3-card-4 w3-border' style={{right:'0'}}>
+                            {userRole=== SUPER_ADMIN?
+                            <button className='w3-button w3-hover-teal w3-blue  w3-bar-item' onClick={()=>setRegistroVisible(true)}>Registrar</button>:
+                            null}
+                            <button className='w3-button w3-hover-teal w3-blue  w3-bar-item'>Subir Archivo</button>
+                            <Link className='w3-button w3-hover-teal w3-blue  w3-bar-item' onClick={cerrarSesion} to='/'>Cerrar sesion</Link>
+                       </div>
+                    </div>
+
                 </div>:
                 null}
              {registroVisible?<FormularioRegistro setRegistroVisible={setRegistroVisible}/>:null}
