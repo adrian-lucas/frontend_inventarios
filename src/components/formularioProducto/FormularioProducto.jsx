@@ -1,6 +1,8 @@
 import ApiServices from "../../services/api.services";
 import { useEffect,useState,useRef } from "react";
 
+
+
 function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible}){
     
     useEffect(() => {
@@ -14,6 +16,7 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
     const [secciones, setSecciones] = useState([]);
     
     const archivo = useRef();
+
     
     const getMarcas = async()=>{
         const response = await ApiServices.getMarcas();
@@ -59,8 +62,12 @@ function FormularioProducto({productoAModificar,actualizarTabla,setItemVisible})
         }
         
     }
+   
     const guardarArchivo = async(e)=>{
         e.preventDefault();
+        //console.log('metodos de Event',e.target.files[0]);
+        //console.log('metodos de href',archivo.current)
+        console.log(archivo.current.files[0]);
         const response = await ApiServices.guardarArchivo({imageFile:archivo.current.files[0]});
         if(response.status === 201){
             console.log(response.data.link);

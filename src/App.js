@@ -10,12 +10,13 @@ function App() {
   const sessionInfo= useSelector((state)=>state.loginInfo);
   console.log('infoProveniente de appjs',sessionInfo.userInfo,'infosession',sessionInfo.session);
   useEffect(() => {
-       verifySesion();
+    verifySesion();
   }, [])
   
   const verifySesion = ()=>{
       if(localStorage.getItem('access_token')!==null){
-          store.dispatch(login());
+        //
+        store.dispatch(login());
       }else{
         store.dispatch(logout());
       }

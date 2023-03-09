@@ -28,6 +28,9 @@ function TablaProductos({listaProductos,actualizarTabla}){
                     <td>Stock</td>
                     <td>Seccion</td>
                 </tr>
+                {
+                
+                }
                 {listaProductos.map(
                     (p)=>{
                         return(
