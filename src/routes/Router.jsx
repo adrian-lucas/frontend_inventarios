@@ -6,6 +6,7 @@ import PageProductos from "../pages/PageProductos";
 import FormularioLogin from "../components/formularioLogin/FormularioLogin";
 import FormikForm from "../components/formikForm/FormikForm";
 import FormularioUsuario2 from "../components/formularioUsuario2/FormularioUsuario2";
+import SalaChat from "../pages/SalaChat";
 function Router({activeSession}){
     
     return (
@@ -15,6 +16,7 @@ function Router({activeSession}){
             <Route path="/usuarios" element = {activeSession?<PageUsuarios/>:<FormularioLogin/>} />
             <Route path="/productos" element =  {activeSession?<PageProductos/>:<FormularioLogin/>}/>
             <Route path="/formikForm" element = {<FormularioUsuario2/>}/>
+            <Route path="/salaChat" element = {<SalaChat/>}/>
         </Routes>
     );
 }
