@@ -6,16 +6,22 @@ import {
   InputLabel,
   Card,
   CardMedia,
-  Grid,
+   
 } from "@mui/material";
-import { Box, Stack } from "@mui/system";
+import { Box, Stack}from "@mui/system";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 function FormularioAutoAsignation() {
   return (
     <div>
-      <Stack>
+      
         <form style={{ width: "100%" }}>
-          <Box sx={{ margin: "15px" }}>
+          <Stack spacing={2}
+            justifyContent="center"
+            alignItems="center"
+            margin = "15px"
+      
+            >
             <FormControl fullWidth>
               <InputLabel>Zona de Parqueo</InputLabel>
               <Select
@@ -24,16 +30,9 @@ function FormularioAutoAsignation() {
                 label="Zona de Parqueo"
               />
             </FormControl>
-          </Box>
-
-          <Box sx={{ margin: "15px" }}>
-            <TextField
-              sx={{ width: "50%" }}
-              type="date"
-              id="outlined-name"
-              label="Fecha Inicio"
-              variant="outlined"
-            />
+          
+            <Stack direction={"row"} sx={{width:'100%'}} spacing={5}>
+            <DatePicker />
             <TextField
               sx={{ width: "50%" }}
               type="date"
@@ -41,8 +40,9 @@ function FormularioAutoAsignation() {
               label="Fecha Fin"
               variant="outlined"
             />
-          </Box>
-          <Box sx={{ margin: "15px" }}>
+            </Stack>
+          
+          
             <FormControl fullWidth>
               <InputLabel id="espacio-parqueo-label">
                 Espacio de Parqueo
@@ -53,8 +53,8 @@ function FormularioAutoAsignation() {
                 label="Espacio de Parqueo"
               />
             </FormControl>
-          </Box>
-          <Box sx={{ margin: "15px" }}>
+          
+          
             <FormControl fullWidth>
               <InputLabel id="espacio-parqueo-label">Tipo de Pago</InputLabel>
               <Select
@@ -63,8 +63,8 @@ function FormularioAutoAsignation() {
                 label="Tipo de Pago"
               />
             </FormControl>
-          </Box>
-          <Box sx={{ margin: "15px" }}>
+          
+          
             <FormControl fullWidth>
               <InputLabel id="espacio-parqueo-label">
                 Periodo de tiempo entre cuotas
@@ -75,43 +75,31 @@ function FormularioAutoAsignation() {
                 label="Periodo de tiempo entre cuotas"
               />
             </FormControl>
-          </Box>
-          <Box>
-            <Card sx={{ maxWidth: 345, margin: "auto" }}>
+          
+          
+            <Card>
               <CardMedia
-                sx={{ height: 140 }}
+                sx={{ height: 140, width:350}}
                 image="https://wpdirecto.com/wp-content/uploads/2017/08/alt-de-una-imagen.png"
                 title="default-image"
               />
             </Card>
-          </Box>
-          <Box>
-            <Grid container spacing={0} justifyContent="center">
-              <Grid
-                item
-                xs={4}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <Button>Pagar Ahora</Button>
-              </Grid>
-              <Grid
-                item
-                xs={4}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <Button>Pagar después</Button>
-              </Grid>
-              <Grid
-                item
-                xs={4}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <Button>Cancelar</Button>
-              </Grid>
-            </Grid>
-          </Box>
+
+            </Stack>
+            <Stack
+              sx={{justifyContent:"center",
+              alignItems:"center",
+              margin:'10%'}}
+              direction={"row"} 
+              spacing={'auto'}
+            >
+              <Button>Pagar Ahora</Button>
+              <Button>Pagar después</Button>
+              <Button>Cancelar</Button>
+            </Stack>
+            
         </form>
-      </Stack>
+      
     </div>
   );
 }
