@@ -1,7 +1,15 @@
 import {Button,TextField} from '@mui/material';
 import { Box } from '@mui/system';
 
-function FormularioSolicitante({solicitante}){
+function FormularioSolicitante(){
+    const solicitante = {
+        id:1,
+        first_name:"Gussie",
+        last_name:"Aleksic",
+        email:"galeksic0@elegantthemes.com",
+        gender:"Female",
+        username:"galeksic0"
+    };
 return (
     <div>
       <form style={{width:'100%'}}>
@@ -12,7 +20,7 @@ return (
                 value={solicitante.name}
                 variant="outlined"
                 fullWidth
-                contentEditable="false"
+                
 
             />
         </Box>
@@ -34,8 +42,6 @@ return (
                 value={solicitante.apMaterno}
                 variant="outlined"
                 fullWidth
-                contentEditable="false"
-
             />
         </Box>
 

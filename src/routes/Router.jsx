@@ -8,6 +8,7 @@ import TablaProductos from "../components/tablaProductos/TablaProductos";
 import TableSolicitantes from "../components/tablaSolicitante/TableSolicitante";
 import FormularioSolicitante from "../components/formularioSolicitante/FormularioSolicitante";
 import FormularioAutoAsignation from "../components/formularioAutoasignation/FormularioAutoAsignation";
+import ProfileClient from "../components/profileClient/ProfileClient";
 //import Tarjeta from "../components/tarjeta/tarjeta";
 function Router(){
     return (
@@ -20,6 +21,7 @@ function Router(){
             <Route path="/tableSolicitantes" element = {<TableSolicitantes/>}/>
             <Route path="/formSolicitantes" element = {<FormularioSolicitante/>}/>
             <Route path="/formAutoAsignation" element = {<FormularioAutoAsignation/>}/>
+            <Route path="/profileClient" element={<ProfileClient/>}/>
         </Routes>
     );
 }

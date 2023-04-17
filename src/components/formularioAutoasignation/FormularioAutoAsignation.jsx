@@ -9,7 +9,7 @@ import {
    
 } from "@mui/material";
 import { Box, Stack}from "@mui/system";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 function FormularioAutoAsignation() {
   return (
@@ -32,13 +32,25 @@ function FormularioAutoAsignation() {
             </FormControl>
           
             <Stack direction={"row"} sx={{width:'100%'}} spacing={5}>
-            <DatePicker />
+            <TextField
+              sx={{ width: "50%" }}
+              type="date"
+              label="Fecha Inicio"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+
             <TextField
               sx={{ width: "50%" }}
               type="date"
               id="outlined-uncontrolled"
               label="Fecha Fin"
               variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             </Stack>
           
