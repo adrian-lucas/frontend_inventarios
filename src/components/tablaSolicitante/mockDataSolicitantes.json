@@ -1,0 +1,12 @@
+[
+    {"id":1,"name":"Adrian","apPaterno":"Mamani","apMaterno":"Mamani","ci":"12345678","cargo":"Administrador","email":"adrian@gmail.com","celular":"63258974","direccion":"Av. Los angeles","estado":"Pendiente"},
+    {"id":2,"name":"Juanita","apPaterno":"Alcachofaz","apMaterno":"Prado","ci":"789456","cargo":"Cliente","email":"juanita@gmail.com","celular":"78954632","direccion":"Indepencia #12","estado":"Rechazado"},
+    {"id":3,"name":"Edgar","apPaterno":"Ortega","apMaterno":"Quispe","ci":"1478569","cargo":"Administrador","email":"edgar@gmail.com","celular":"74859621","direccion":"Av. Brasil","estado":"Aceptado"},
+    {"id":4,"name":"Lizbeth","apPaterno":"Quiroz","apMaterno":"Smith","ci":"74185296","cargo":"Docente","email":"lizhet@gmail.com","celular":"69874215","direccion":"Santa fe","estado":"Aceptado"},
+    {"id":5,"name":"Enrique","apPaterno":"Fernandez","apMaterno":"Prado","ci":"2343434","cargo":"Guardia","email":"enrique@gmail.com","celular":"796328","direccion":"Villa Taquiña","estado":"Aceptado"},
+    {"id":6,"name":"Vladimir","apPaterno":"Neruda","apMaterno":"Costas","ci":"324343","cargo":"Guardia","email":"vladimir@gmail.com","celular":"78945127","direccion":"Av circunvalacion","estado":"Rechazado"},
+    {"id":7,"name":"Jose","apPaterno":"Miranda","apMaterno":"Prada","ci":"545454","cargo":"Docente","email":"jose@gmail.com","celular":"69851472","direccion":"Av santa fe","estado":"Rechazado"},
+    {"id":8,"name":"Elmer","apPaterno":"Cayetano","apMaterno":"Roman","ci":"567657","cargo":"Cliente","email":"elmer@gmail.com","celular":"78965412","direccion":"Calle 5","estado":"Pendiente"},
+    {"id":9,"name":"Beatriz","apPaterno":"Villarroel","apMaterno":"Torrico","ci":"6787687","cargo":"Cliente","email":"beatriz@gmail.com","celular":"75412896","direccion":"Villa taquiña","estado":"Pendiente"},
+    {"id":10,"name":"Marcelo ","apPaterno":"Galzin","apMaterno":"Bermejo","ci":"34534534","cargo":"Cliente","email":"marcelo@gmail.com","celular":"78945621","direccion":"San Andres#25","estado":"Pendiente"}
+]
